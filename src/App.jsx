@@ -10,6 +10,7 @@ import NotFound from "./Components/NotFound/NotFound";
 import Blogs from "./Components/Blogs/Blogs";
 import Services from "./Components/Services/Services";
 import About from "./Components/About/About";
+import SignUp from "./Components/SignUp/SignUp";
 
 function App() {
   const [count, setCount] = useState(0);
@@ -22,6 +23,7 @@ function App() {
         <Route path="/services" element={<Services></Services>}></Route>
         <Route path="/blogs" element={<Blogs></Blogs>}></Route>
         <Route path="/about" element={<About></About>}></Route>
+        <Route path="/signup" element={<SignUp></SignUp>}></Route>
         <Route path="/login" element={<Login></Login>}></Route>
         <Route path="*" element={<NotFound></NotFound>}></Route>
       </Routes>

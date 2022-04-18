@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import './Seervice.css'
 
 const Seervice = (props) => {
@@ -7,14 +8,9 @@ const Seervice = (props) => {
   return (
       <div>
           <img className="service-img mx-auto mb-8 mt-6" src={picture} alt="" />
-        <h2>name {name}</h2>
+        <h2 className="text-5xl font-bold text-white mb-3">{name}</h2>
         <p>{description}</p>
-        <button
-          className="bg-white bottom-0 text-black px-20 py-3 mt-3 rounded-xl"
-          type="submit"
-        >
-          More detail
-        </button>
+        <Link to="/login" className="bg-white text-black mt-4 px-20 py-3 mt-3 rounded-xl">More detail</Link>
       </div>
   );
 };
