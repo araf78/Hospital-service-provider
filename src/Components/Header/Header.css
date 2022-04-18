@@ -1,0 +1,14 @@
+.header{
+    display: flex;
+    justify-content: space-around;
+}
+.wrytica{
+    font-weight: 650;
+}
+.header a {
+    margin-right: 60px;
+    font-size: 20px;
+}
+.header a:hover{
+    color: gray;
+}
