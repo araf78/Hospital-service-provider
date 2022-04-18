@@ -1,4 +1,4 @@
-import { getAuth } from '@firebase/auth';
+import { getAuth, signOut } from '@firebase/auth';
 import React from 'react';
 import { useAuthState } from 'react-firebase-hooks/auth';
 import { Link } from 'react-router-dom';
@@ -20,7 +20,7 @@ const Header = () => {
                 {
                     user?.uid
                      ? 
-                     <button className="signOut-btn">Sign out</button> 
+                     <button onClick={()=>signOut(auth)} className="signOut-btn">Sign out</button> 
                     : 
                     <Link to="/login">Login</Link>
                     
