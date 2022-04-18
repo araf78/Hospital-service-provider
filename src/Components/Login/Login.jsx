@@ -1,8 +1,13 @@
+import { getAuth } from '@firebase/auth';
 import React from 'react';
-import useFirebase from '../../Hooks/useFirebase'
+import {useSignInWithGoogle} from 'react-firebase-hooks/auth'
+import app from '../../firebase.init';
+
+const auth = getAuth(app)
+
 const Login = () => {
 
-    const {signInWithGoogle} = useFirebase()
+   const [signInWithGoogle, user] = useSignInWithGoogle(auth)
 
     return (
         <div className="m-20 mx-auto bg-cyan-800 rounded-2xl w-2/4">
@@ -14,12 +19,12 @@ const Login = () => {
                 </div>
                 <div className="input-group mt-8 mb-6">
                     <label className='block text-white' htmlFor="Password">Password</label>
-                    <input className="border-2 p-2 text-2xl rounded-md" type="password" name="password" id="" placeholder='password'/>
                 </div>
+                    <input className="border-2 p-2 text-2xl rounded-md" type="password" name="password" id="" placeholder='password'/>
                     
                  <p>   <input className="bg-gray-50 text-cyan-800 font-bold mb-8 p-2 mt-8 w-2/5 rounded-md" type="submit" value="Login" /></p>
             </form>
-                    <input onClick={signInWithGoogle} className="bg-gray-50 text-cyan-800 font-bold mb-8 p-2 mt-8 w-2/5 rounded-md" type="submit" value="Continue with google" />
+                    <input onClick={()=> signInWithGoogle()} className="bg-gray-50 text-cyan-800 font-bold mb-8 p-2 mt-8 w-2/5 rounded-md" type="submit" value="Continue with google" />
         </div>
     );
 };

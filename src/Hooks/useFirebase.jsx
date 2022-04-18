@@ -8,20 +8,20 @@ const googleProvider = new GoogleAuthProvider()
 const useFirebase = () =>{
     const [user, setUser] =useState({});
 
-    const signInWithGoogle = ()=>{
-        signInWithPopup(auth, googleProvider)
-        .then(result =>{
-            const user = result.user;
-            setUser(user)
-            console.log(user);
-        })
-        .catch(error =>{
-            console.error(error)
-        })
+    // const signInWithGoogle = ()=>{
+    //     signInWithPopup(auth, googleProvider)
+    //     .then(result =>{
+    //         const user = result.user;
+    //         setUser(user)
+    //         console.log(user);
+    //     })
+    //     .catch(error =>{
+    //         console.error(error);
+    //     })
     }
     return {
         user,
         signInWithGoogle
     }
 }
-export default useFirebase;
+// export default useFirebase;
