@@ -1,12 +1,16 @@
 import { getAuth } from '@firebase/auth';
-import React from 'react';
-import {useSignInWithGoogle} from 'react-firebase-hooks/auth'
+import React, { useState } from 'react';
+import {useSignInWithEmailAndPassword, useSignInWithGoogle} from 'react-firebase-hooks/auth'
 import app from '../../firebase.init';
 
 const auth = getAuth(app)
 
 const Login = () => {
 
+    const [email, setEmail] = useState('');
+    const [password, setPassword] = useState('');
+
+    const [signInWithEmailAndPassword] = useSignInWithEmailAndPassword(auth)
    const [signInWithGoogle, user] = useSignInWithGoogle(auth)
 
     return (
@@ -15,15 +19,15 @@ const Login = () => {
             <form className='form-container'>
                 <div className="input-group mt-8 mb-6">
                     <label className='block text-white' htmlFor="Email">Email</label>
-                    <input className="border-2 p-2 text-2xl rounded-md 3/4" type="email" name="email" id="" placeholder='Your email'/>
+                    <input onChange={ (e) =>{setEmail(e.target.value)}} value={email} className="border-2 p-2 text-2xl rounded-md 3/4" type="email" name="email" id="" placeholder='Your email'/>
                 </div>
                 <div className="input-group mt-8 mb-6">
                     <label className='block text-white' htmlFor="Password">Password</label>
                 </div>
-                    <input className="border-2 p-2 text-2xl rounded-md" type="password" name="password" id="" placeholder='password'/>
+                    <input onChange={ (e) =>{setPassword(e.target.value)}} value={password}  className="border-2 p-2 text-2xl rounded-md" type="password" name="password" id="" placeholder='password'/>
                     
-                 <p>   <input className="bg-gray-50 text-cyan-800 font-bold mb-8 p-2 mt-8 w-2/5 rounded-md" type="submit" value="Login" /></p>
             </form>
+                 <p>  onClick={()=>signInWithEmailAndPassword(email, password)} <input className="bg-gray-50 text-cyan-800 font-bold mb-8 p-2 mt-8 w-2/5 rounded-md" type="submit" value="Login" /></p>
                     <input onClick={()=> signInWithGoogle()} className="bg-gray-50 text-cyan-800 font-bold mb-8 p-2 mt-8 w-2/5 rounded-md" type="submit" value="Continue with google" />
         </div>
     );
