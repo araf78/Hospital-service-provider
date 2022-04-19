@@ -4,7 +4,7 @@ import Seervice from '../Service/Seervice'
 const Services = () => {
    const services =  [
     {
-        id: "625d3037c5d376a1385aef56",
+        "id": "625d3037c5d376a1385aef56",
       "price": "$2,130.94",
       "picture": "http://askproject.net/wryter/wp-content/uploads/sites/36/2021/10/illustration_1.png",
       "name": "Creative Agency",
@@ -47,14 +47,15 @@ const Services = () => {
     }
   ]
     return (
-        <div className="grid grid-cols-3 gap-4 m-20 ">   
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-4 m-20 ">  
+         {/* our services   */}
             {
               
                 services.map(service =>{
               return      <div className=' bg-cyan-700 gap-4 mb-10 p-5      text-white mx-auto  rounded-2xl '>
                       {
                         <Seervice 
-                        key={service}
+                        key={service.id}
                         service={service}
                         ></Seervice>
                       }

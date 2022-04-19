@@ -2,7 +2,7 @@ import React from "react";
 
 const Blogs = () => {
   return (
-    <div className="grid grid-cols-3 gap-4 p-10">
+    <div className="grid grid-cols-1  md:grid-cols-3 gap-4 p-10">
       <div className="bg-green-100 border-2 rounded-lg border-zinc-600 p-5">
         <h2 className="font-bold mb-4">
           Q1. Difference between authorization and authentication

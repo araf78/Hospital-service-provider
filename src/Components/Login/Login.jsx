@@ -1,6 +1,9 @@
 import { getAuth } from "@firebase/auth";
+import { async } from "@firebase/util";
 import { useState } from "react";
-import { useSignInWithEmailAndPassword } from "react-firebase-hooks/auth";
+import {  useSendPasswordResetEmail, useSignInWithEmailAndPassword, useSignInWithGoogle } from "react-firebase-hooks/auth";
+import {   useLocation, useNavigate } from "react-router";
+import { Link } from "react-router-dom";
 import app from "../../firebase.init";
 
 const auth = getAuth(app);
@@ -8,19 +11,43 @@ const auth = getAuth(app);
 const Login = () => {
 
   const [
-    signInWithEmailAndPassword,
-    
+    signInWithEmailAndPassword
   ]  = useSignInWithEmailAndPassword(auth);
-  const [signInWithGoogle, user] = useSignInWithGoogle(auth);
+  const [signInWithGoogle] = useSignInWithGoogle(auth);
+  const [sendPasswordResetEmail, sending, error] = useSendPasswordResetEmail(
+    auth
+  );
 
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+
+  const navigate = useNavigate();
+  const location = useLocation();
+
+  const from = location.state?.from?.pathname || "/";
+
+const handleSignInWithEmailAndPassword = ()=>{
+  signInWithEmailAndPassword(email, password)
+  .then(()=>{
+    navigate(from, { replace: true })
+  })
+
+}
+
+  const handleSignInWithGoogle = ()=>{
+    signInWithGoogle()
+    .then(()=>{
+      navigate(from, { replace: true })
+    })
+  }
 
   return (
     <div className="m-20 mx-auto bg-cyan-800 rounded-2xl w-2/4">
       <h2 className="text-white py-2 mt-2 font-md text-3xl font-black">
         Login
       </h2>
+
+        {/* login form */}
       <form className="form-container">
         <div className="input-group mt-8 mb-6">
           <label className="block text-white" htmlFor="Email">
@@ -55,16 +82,28 @@ const Login = () => {
         
         <div className="grid grid-rows-2 gap-2">
         <div>
-        <input onClick={() => signInWithEmailAndPassword(email, password)}
+
+         {/* sign in with  email and password */}
+
+        <input onClick={handleSignInWithEmailAndPassword}
           className="bg-gray-50 text-cyan-800 font-bold mb-8 p-2 mt-8 w-2/5 rounded-md"
           type="submit"
           value="Login"
         />
         </div>
-        <p></p>
+
+        {/* create new account and reset password */}
+
+        <p className="text-white text-2xl"> You don't have account? or <Link className='underline' to="/signup">Create now</Link> 
+        {/* reset password  */}
+        <button  onClick={async () => {
+         await sendPasswordResetEmail(email);
+          alert('Sent email');
+        }} className='underline ml-5' >Reset password?</button></p>
       <div>
+       {/* sign in with  google */}
       <input
-        onClick={()=>signInWithGoogle()}
+       onClick={handleSignInWithGoogle  }
         className="bg-gray-50 text-cyan-800 font-bold mb-8 p-2 w-2/5 rounded-md"
         type="submit"
         value="Continue with google"

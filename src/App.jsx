@@ -11,6 +11,7 @@ import Blogs from "./Components/Blogs/Blogs";
 import Services from "./Components/Services/Services";
 import About from "./Components/About/About";
 import SignUp from "./Components/SignUp/SignUp";
+import RequiredAuth from "./Components/RequiredAuth/RequiredAuth";
 
 function App() {
   const [count, setCount] = useState(0);
@@ -20,7 +21,12 @@ function App() {
       <Header></Header>
       <Routes>
         <Route path="/" element={<Home></Home>}></Route>
-        <Route path="/services" element={<Services></Services>}></Route>
+        <Route path="/services" element={
+          <RequiredAuth>
+            <Services></Services>
+          </RequiredAuth>
+        }></Route>
+       
         <Route path="/blogs" element={<Blogs></Blogs>}></Route>
         <Route path="/about" element={<About></About>}></Route>
         <Route path="/signup" element={<SignUp></SignUp>}></Route>
