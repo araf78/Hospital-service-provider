@@ -94,7 +94,12 @@ const handleSignInWithEmailAndPassword = ()=>{
 
         {/* create new account and reset password */}
 
-      
+        <p className="text-white text-2xl"> You don't have account? or <Link className='underline' to="/signup">Create now</Link> 
+        {/* reset password  */}
+        <button  onClick={async () => {
+         await sendPasswordResetEmail(email);
+          alert('Sent email');
+        }} className='underline ml-5' >Reset password?</button></p>
       <div>
        {/* sign in with  google */}
       <input
