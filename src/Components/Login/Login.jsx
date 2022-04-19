@@ -14,7 +14,7 @@ const Login = () => {
     signInWithEmailAndPassword
   ]  = useSignInWithEmailAndPassword(auth);
   const [signInWithGoogle] = useSignInWithGoogle(auth);
-  const [sendPasswordResetEmail, sending, error] = useSendPasswordResetEmail(
+  const [sendPasswordResetEmail,user, sending, error] = useSendPasswordResetEmail(
     auth
   );
 
@@ -29,10 +29,22 @@ const Login = () => {
 const handleSignInWithEmailAndPassword = ()=>{
   signInWithEmailAndPassword(email, password)
   .then(()=>{
+    if(user){
     navigate(from, { replace: true })
+    }
   })
 
 }
+
+   {/* error handle 
+         */}
+         if (error) {
+          return (
+            <div>
+              <p>Error: {error}</p>
+            </div>
+          );
+        }
 
   const handleSignInWithGoogle = ()=>{
     signInWithGoogle()
@@ -60,7 +72,7 @@ const handleSignInWithEmailAndPassword = ()=>{
             type="email"
             name="email"
             id=""
-            placeholder="Your email"
+            placeholder="Your email" required
           />
         </div>
         <div className="input-group mt-8 mb-6">
@@ -75,11 +87,11 @@ const handleSignInWithEmailAndPassword = ()=>{
           type="password"
           name="password"
           id=""
-          placeholder="password"
+          placeholder="password" required
         />
       </form>
        
-        
+     
         <div className="grid grid-rows-2 gap-2">
         <div>
 
@@ -103,7 +115,7 @@ const handleSignInWithEmailAndPassword = ()=>{
       <div>
        {/* sign in with  google */}
       <input
-       onClick={handleSignInWithGoogle  }
+       onClick={handleSignInWithGoogle}
         className="bg-gray-50 text-cyan-800 font-bold mb-8 p-2 w-2/5 rounded-md"
         type="submit"
         value="Continue with google"
